@@ -22,7 +22,7 @@ public class BallInteractions : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (rb.transform.position.y < -10) {
+        if (rb.transform.position.y < -20) {
             Respawn();
         }
     }
@@ -49,8 +49,19 @@ public class BallInteractions : MonoBehaviour
                 playground.transform.Find("Level " + currentlevel.ToString()).gameObject.SetActive(false);
                 Respawn();
                 currentlevel++;
+
+                if (currentlevel > 3)
+                {
+                    Application.Quit();
+                }
+
                 playground.transform.Find("Level " + currentlevel.ToString()).gameObject.SetActive(true);
                 break;
         }
+    }
+
+    public void Collectable()
+    {
+        Debug.Log("OUIIII GG MA COUILLE !!");
     }
 }
