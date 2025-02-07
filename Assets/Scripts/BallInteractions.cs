@@ -8,15 +8,11 @@ public class BallInteractions : MonoBehaviour
 {
 
     private Rigidbody rb;
-    private int currentlevel = 1;
-    GameObject playground;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playground = GameObject.Find("Playground");
-        playground.transform.Find("Level 1").gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -27,7 +23,7 @@ public class BallInteractions : MonoBehaviour
         }
     }
 
-    void Respawn() {
+    public void Respawn() {
         rb.velocity = Vector3.zero;
         rb.transform.position = new Vector3(0, 50.0f, 0);
     }
@@ -46,16 +42,7 @@ public class BallInteractions : MonoBehaviour
                 RandomTeleportation();
                 break;
             case "yellow":
-                playground.transform.Find("Level " + currentlevel.ToString()).gameObject.SetActive(false);
-                Respawn();
-                currentlevel++;
-
-                if (currentlevel > 3)
-                {
-                    Application.Quit();
-                }
-
-                playground.transform.Find("Level " + currentlevel.ToString()).gameObject.SetActive(true);
+                GetComponent<LevelManager>().SwitchLevel();
                 break;
         }
     }
